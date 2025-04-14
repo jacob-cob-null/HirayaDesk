@@ -1,0 +1,12 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 14, 2025, 8:58:37 PM
+    Author     : Jacob
+*/
+
+.MFXButton:hover {
+    -fx-background-color: #112e26;
+}
