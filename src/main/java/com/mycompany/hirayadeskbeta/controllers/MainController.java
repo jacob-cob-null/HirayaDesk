@@ -20,7 +20,11 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            showDashboard();
+        } catch (Exception e) {
+            e.printStackTrace(); // Helps catch any load issues
+        }
     }
     @FXML
     private AnchorPane contentPane;

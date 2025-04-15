@@ -36,17 +36,17 @@ public class App extends Application {
 
     public static void main(String[] args) {
 
-        MainDB.connect();
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter admin ID: ");
-        int username = sc.nextInt();
-        sc.nextLine(); // Consume the newline character
-
-        System.out.print("Enter password: ");
-        String password = sc.nextLine();
-        String result = AdminDBcontroller.authenticate(username, password);
-        System.out.println(result);
-//        //launch();
+//        MainDB.connect();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.print("Enter admin ID: ");
+//        int username = sc.nextInt();
+//        sc.nextLine(); // Consume the newline character
+//
+//        System.out.print("Enter password: ");
+//        String password = sc.nextLine();
+//        String result = AdminDBcontroller.authenticate(username, password);
+//        System.out.println(result);
+        launch();
     }
 
 }

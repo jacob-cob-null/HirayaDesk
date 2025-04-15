@@ -16,10 +16,8 @@ import java.sql.SQLException;
  */
 public class AdminDBcontroller {
 
-
-
     //AUTHENTICATE
-   public static String authenticate(int userID, String password) {
+   public static boolean authenticate(int userID, String password) {
     boolean status = false;
     Connection conn = MainDB.connect();
     String query = "SELECT * FROM Admin WHERE adminID = ? AND adminPW = ?";
@@ -33,7 +31,7 @@ public class AdminDBcontroller {
     } finally {
         MainDB.closeConnection(conn);
     }
-    return "Authentication status: " + status;
+    return status;
 }
 
 }

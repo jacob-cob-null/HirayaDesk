@@ -3,10 +3,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Apr 14, 2025, 8:58:37 PM
+    Created on : Apr 15, 2025, 8:10:29 PM
     Author     : Jacob
 */
-
-.MFXButton:hover {
-    -fx-background-color: #112e26;
+.mfx-text-field .floating-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: #4CAF50;  /* Set the desired color for the floating label */
 }
