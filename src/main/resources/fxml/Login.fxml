@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.LoginController">
+   <children>
+      <MFXFilterComboBox layoutX="71.0" layoutY="72.0" />
+      <MFXTextField floatingText="Username" layoutX="26.0" layoutY="131.0" prefHeight="49.0" prefWidth="200.0" />
+      <MFXPasswordField floatingText="Password" layoutX="26.0" layoutY="200.0" prefHeight="49.0" prefWidth="200.0" />
+      <MFXListView layoutX="544.0" layoutY="101.0" prefHeight="865.0" prefWidth="449.0" />
+      <MFXDatePicker layoutX="26.0" layoutY="268.0" />
+      <MFXTableView fx:id="tableView" layoutX="1029.0" layoutY="101.0" prefHeight="866.0" prefWidth="858.0" />
+   </children>
+</AnchorPane>

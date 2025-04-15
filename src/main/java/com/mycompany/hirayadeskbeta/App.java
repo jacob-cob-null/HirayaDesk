@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import database.MainDB;
+import database.AdminDBcontroller;
+import java.util.Scanner;
 
 import java.io.IOException;
 
@@ -18,7 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Hiraya Abode");
             scene.getStylesheets().add(getClass().getResource("/fxml/Style.css").toExternalForm());
@@ -32,7 +35,18 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+
+        MainDB.connect();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter admin ID: ");
+        int username = sc.nextInt();
+        sc.nextLine(); // Consume the newline character
+
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+        String result = AdminDBcontroller.authenticate(username, password);
+        System.out.println(result);
+//        //launch();
     }
 
 }
