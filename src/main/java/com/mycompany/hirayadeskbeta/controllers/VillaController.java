@@ -4,9 +4,14 @@
  */
 package com.mycompany.hirayadeskbeta.controllers;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXTableView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -15,12 +20,24 @@ import javafx.fxml.Initializable;
  */
 public class VillaController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private MFXButton newRecord;
+    @FXML
+    private MFXComboBox tierCombo;
+    @FXML
+    private MFXTableView villaTable;
+    @FXML
+    private MFXButton deleteBtn;
+    @FXML
+    private MFXButton updateBtn;
+    @FXML
+    private MFXButton createBtn;
+    @FXML
+    private StackPane createOverlay;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
