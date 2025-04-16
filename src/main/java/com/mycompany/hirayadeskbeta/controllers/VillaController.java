@@ -98,12 +98,30 @@ public class VillaController implements Initializable {
 
     private void setupListeners() {
         createBtn.setOnAction(event -> {
+            loadTierIDsToComboBox();
             createOverlay.setVisible(true);
         });
 
+        //CREATING VILLA
         newRecord.setOnAction(event -> {
-            createOverlay.setVisible(false);
+            String selectedID = tierCombo.getValue();
+            if (selectedID == null) {
+                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Villa selected for deletion.");
+                return;
+            }
+            try {
+                VillaDBcontroller.createVilla(selectedID);
+                createOverlay.setVisible(false);
+                loadTierIDsToComboBox();
+                tierCombo.getSelectionModel().clearSelection();
+                refreshTable();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
+        
         deleteBtn.setOnAction(event -> {
             loadVillaIDsToComboBox();
             deleteOverlay.setVisible(true);
@@ -115,6 +133,7 @@ public class VillaController implements Initializable {
             deleteOverlay.setVisible(false);
         });
 
+        //DELETING
         newDelete.setOnAction(event -> {
             Integer selectedID = villaCombo.getValue();
             if (selectedID == null) {
@@ -137,6 +156,15 @@ public class VillaController implements Initializable {
         try {
             List<Integer> villaIDs = VillaDBcontroller.getAllVillaIDs();
             villaCombo.setItems(FXCollections.observableArrayList(villaIDs));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadTierIDsToComboBox() {
+        try {
+            List<String> tierIDs = VillaDBcontroller.getAllTierIDs();
+            tierCombo.setItems(FXCollections.observableArrayList(tierIDs));
         } catch (SQLException e) {
             e.printStackTrace();
         }

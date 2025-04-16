@@ -52,11 +52,6 @@
                                         <Font name="Calibri Bold" size="24.0" />
                                     </font>
                                 </MFXButton>
-                                <MFXButton fx:id="updateBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #2661bf;" text="Update" textFill="WHITE">
-                                    <font>
-                                        <Font name="Calibri Bold" size="24.0" />
-                                    </font>
-                                </MFXButton>
                                 <MFXButton fx:id="createBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #3DD37B;" text="Create" textFill="WHITE">
                                     <font>
                                         <Font name="Calibri Bold" size="24.0" />
@@ -68,7 +63,7 @@
                 </AnchorPane>
 
                 <!-- New StackPane for overlay (hidden by default) -->
-                <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0" visible="false">
+                <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0">
                     <children>
                         <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
                             <bottom>
@@ -97,7 +92,7 @@
                                                       <Font name="Calibri Bold" size="24.0" />
                                                   </font>
                                               </MFXButton>
-                                    <MFXButton fx:id="newRecord" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" textFill="WHITE">
+                                    <MFXButton fx:id="newRecord" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" text="Create" textFill="WHITE">
                                        <font>
                                           <Font name="Calibri Bold" size="24.0" />
                                        </font>

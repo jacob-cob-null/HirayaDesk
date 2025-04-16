@@ -54,6 +54,7 @@ public class VillaDBcontroller {
             MainDB.closeConnection(conn);
         }
     }
+
     //get villaID
     public static List<Integer> getAllVillaIDs() throws SQLException {
         List<Integer> villaIDs = new ArrayList<>();
@@ -70,7 +71,46 @@ public class VillaDBcontroller {
         } finally {
             MainDB.closeConnection(conn);
         }
-
         return villaIDs;
+    }
+
+    public static List<String> getAllTierIDs() throws SQLException {
+        List<String> tierIDs = new ArrayList<>();
+        Connection conn = MainDB.connect();
+        String query = "SELECT tierID FROM Tier";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tierIDs.add(rs.getString("tierID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
+        return tierIDs;
+    }
+
+    public static void createVilla(String tier) throws SQLException {
+        Connection conn = MainDB.connect();
+        String insertQuery = "INSERT INTO Villa (tierID, availability) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, tier);
+            pstmt.setInt(2, 1); 
+            pstmt.executeUpdate();
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int villaID = generatedKeys.getInt(1);
+
+                Villa villa = new Villa(villaID, tier, true);
+                rawVillaData.add(villa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
     }
 }
