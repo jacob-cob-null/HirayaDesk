@@ -35,12 +35,16 @@
                                 </Text>
                             </children>
                         </StackPane>
-                        <MFXTableView fx:id="villaTable" depthTest="ENABLE" layoutX="24.0" layoutY="189.0" prefHeight="727.0" prefWidth="1519.0" />
+                        
+                        <!-- MFXTableView without columns (will be configured in controller) -->
+                        <MFXTableView fx:id="villaTable" depthTest="ENABLE" layoutX="24.0" layoutY="210.0" prefHeight="727.0" prefWidth="1519.0" />
+
                         <Text fill="#1b4137" layoutX="23.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Homes">
                             <font>
                                 <Font name="Arial Bold" size="45.0" />
                             </font>
                         </Text>
+                        
                         <HBox alignment="CENTER_RIGHT" layoutX="1123.0" layoutY="930.0" prefHeight="100.0" prefWidth="420.0" spacing="20.0">
                             <children>
                                 <MFXButton fx:id="deleteBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #b81f1f;" text="Delete" textFill="WHITE">
@@ -62,8 +66,9 @@
                         </HBox>
                     </children>
                 </AnchorPane>
+
                 <!-- New StackPane for overlay (hidden by default) -->
-                <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0">
+                <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0" visible="false">
                     <children>
                         <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
                             <bottom>
@@ -85,20 +90,80 @@
                                                 <Insets top="50.0" />
                                             </VBox.margin>
                                         </MFXComboBox>
-                                        <MFXButton fx:id="newRecord" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" textFill="WHITE">
-                                            <font>
-                                                <Font name="Calibri Bold" size="24.0" />
-                                            </font>
-                                            <VBox.margin>
-                                                <Insets top="50.0" />
-                                            </VBox.margin>
-                                        </MFXButton>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                              <MFXButton fx:id="cancel1" prefHeight="45.0" prefWidth="151.0" style="-fx-border-color: #1b4137; -fx-background-color: white; -fx-border-width: 1;" text="Cancel">
+                                                  <font>
+                                                      <Font name="Calibri Bold" size="24.0" />
+                                                  </font>
+                                              </MFXButton>
+                                    <MFXButton fx:id="newRecord" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                 </children>
+                              </HBox>
                                     </children>
-                                    <!-- Your input fields go here -->
                                 </VBox>
                             </bottom>
+                     <top>
+                        <VBox prefHeight="0.0" prefWidth="433.0" BorderPane.alignment="CENTER" />
+                     </top>
                         </MFXGenericDialog>
                     </children>
+                    <effect>
+                        <DropShadow height="30.0" radius="14.5" width="30.0">
+                            <color>
+                                <Color red="0.4736842215061188" green="0.4736842215061188" blue="0.4736842215061188" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </StackPane>
+            <StackPane fx:id="deleteOverlay" layoutX="10.0" layoutY="10.0" prefHeight="1096.0" prefWidth="1683.0" visible="false">
+               <children>
+                  <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
+                     <bottom>
+                        <VBox alignment="TOP_CENTER" prefHeight="335.0" prefWidth="433.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 30px;" BorderPane.alignment="CENTER">
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Home Record">
+                                 <font>
+                                    <Font size="39.0" />
+                                 </font>
+                              </Text>
+                              <MFXComboBox fx:id="villaCombo" floatingText="Enter Villa ID" minHeight="-Infinity" prefHeight="38.0" prefWidth="285.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="50.0" />
+                                 </VBox.margin>
+                              </MFXComboBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <MFXButton fx:id="cancel2" prefHeight="45.0" prefWidth="151.0" style="-fx-border-color: #1b4137; -fx-background-color: white; -fx-border-width: 1;" text="Cancel">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="newDelete" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #b81f1f;" text="Delete" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </bottom>
+                     <top>
+                        <VBox prefHeight="0.0" prefWidth="433.0" BorderPane.alignment="CENTER" />
+                     </top>
+                  </MFXGenericDialog>
+               </children>
                <effect>
                   <DropShadow height="30.0" radius="14.5" width="30.0">
                      <color>
@@ -106,7 +171,7 @@
                      </color>
                   </DropShadow>
                </effect>
-                </StackPane>
+            </StackPane>
             </children>
         </StackPane>
     </children>

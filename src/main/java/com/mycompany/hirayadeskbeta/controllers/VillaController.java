@@ -1,43 +1,150 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.hirayadeskbeta.controllers;
 
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import java.net.URL;
-import java.util.ResourceBundle;
+import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 
-/**
- * FXML Controller class
- *
- * @author Jacob
- */
+import database.VillaDBcontroller;  // Import VillaDBcontroller
+import database.objects.Villa;    // Import Villa class
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class VillaController implements Initializable {
 
     @FXML
-    private MFXButton newRecord;
-    @FXML
-    private MFXComboBox tierCombo;
-    @FXML
-    private MFXTableView villaTable;
+    private MFXTableView<Villa> villaTable;
+
     @FXML
     private MFXButton deleteBtn;
+
     @FXML
     private MFXButton updateBtn;
+
     @FXML
     private MFXButton createBtn;
+
     @FXML
     private StackPane createOverlay;
 
+    @FXML
+    private StackPane deleteOverlay;
+    @FXML
+    private MFXButton cancel1;
+    @FXML
+    private MFXButton cancel2;
+
+    @FXML
+    private MFXComboBox<String> tierCombo;
+
+    @FXML
+    private MFXComboBox<Integer> villaCombo;
+
+    @FXML
+    private MFXButton newRecord;
+
+    @FXML
+    private MFXButton newDelete;
+
+    // Observable list to hold Villa objects
+    private ObservableList<Villa> villaData = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setupTable();
+        setupListeners();
+
+        try {
+            VillaDBcontroller.mapVilla();
+            refreshTable();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        createOverlay.setVisible(false);
     }
 
+    private void setupTable() {
+
+        MFXTableColumn<Villa> idColumn = new MFXTableColumn<>("Villa ID");
+        MFXTableColumn<Villa> tierColumn = new MFXTableColumn<>("Tier");
+        MFXTableColumn<Villa> availableColumn = new MFXTableColumn<>("Availability");
+
+        idColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Villa::getVillaID));
+        tierColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Villa::getTierID));
+        availableColumn.setRowCellFactory(v -> new MFXTableRowCell<>(villa -> villa.isAvailable() ? "Available" : "Not Available"));
+
+        idColumn.setStyle("-fx-font-size: 16px;");
+        tierColumn.setStyle("-fx-font-size: 16px;");
+        availableColumn.setStyle("-fx-font-size: 16px;");
+        villaTable.setStyle("-fx-font-size: 16px;");
+
+        idColumn.setPrefWidth(100);
+        tierColumn.setPrefWidth(200);
+        availableColumn.setPrefWidth(200);
+
+        villaTable.getTableColumns().addAll(idColumn, tierColumn, availableColumn);
+    }
+
+    private void setupListeners() {
+        createBtn.setOnAction(event -> {
+            createOverlay.setVisible(true);
+        });
+
+        newRecord.setOnAction(event -> {
+            createOverlay.setVisible(false);
+        });
+        deleteBtn.setOnAction(event -> {
+            loadVillaIDsToComboBox();
+            deleteOverlay.setVisible(true);
+        });
+        cancel1.setOnAction(event -> {
+            createOverlay.setVisible(false);
+        });
+        cancel2.setOnAction(event -> {
+            deleteOverlay.setVisible(false);
+        });
+
+        newDelete.setOnAction(event -> {
+            Integer selectedID = villaCombo.getValue();
+            if (selectedID == null) {
+                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Villa selected for deletion.");
+                return;
+            }
+            try {
+                VillaDBcontroller.deleteVilla(selectedID);
+                deleteOverlay.setVisible(false);
+                loadVillaIDsToComboBox();
+                villaCombo.getSelectionModel().clearSelection();
+                refreshTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
+    private void loadVillaIDsToComboBox() {
+        try {
+            List<Integer> villaIDs = VillaDBcontroller.getAllVillaIDs();
+            villaCombo.setItems(FXCollections.observableArrayList(villaIDs));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void refreshTable() {
+        villaData.clear();
+        villaData.addAll(VillaDBcontroller.rawVillaData);
+        villaTable.setItems(villaData);
+    }
 }
