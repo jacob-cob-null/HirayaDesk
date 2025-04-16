@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.hirayadeskbeta.controllers.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.hirayadeskbeta.controllers.DashboardController">
    <children>
       <Text layoutX="24.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
          <font>
