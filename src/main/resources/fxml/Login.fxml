@@ -8,20 +8,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@styles/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.LoginController">
+
     <children>
-      <StackPane fx:id="rootPane" layoutX="2.0" layoutY="-16.0" prefHeight="150.0" prefWidth="200.0">
-         <children>
-              <VBox fx:id="rootVBox" prefHeight="1086.0" prefWidth="723.0">
-               <children>
-                  <ImageView fx:id="backgroundImage" fitHeight="1088.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true" smooth="true" />
-               </children>
-              </VBox>
-         </children>
-      </StackPane>
+        <StackPane fx:id="rootPane" layoutX="-22.0" layoutY="-16.0" prefHeight="1103.0" prefWidth="746.0">
+            <children>
+                <VBox fx:id="rootVBox" prefHeight="1086.0" prefWidth="723.0">
+                    <children>
+                        <ImageView fx:id="backgroundImage" fitHeight="1088.0" fitWidth="741.0" pickOnBounds="true" preserveRatio="true" smooth="true" />
+                    </children>
+                </VBox>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" height="1107.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="732.0">
+                    <fill>
+                        <LinearGradient endX="1.0" endY="0.3033175355450237" startX="0.35545023696682454" startY="0.6303317535545024">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color red="0.024122806265950203" green="0.1184210553765297" blue="0.09327485412359238" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="0.3255033557046979">
+                                    <color>
+                                        <Color red="0.10588235408067703" green="0.2549019753932953" blue="0.21568627655506134" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="1.0" green="1.0" blue="1.0" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </LinearGradient>
+                    </fill>
+                </Rectangle>
+            </children>
+        </StackPane>
         <VBox layoutX="854.0" layoutY="164.0" prefHeight="691.0" prefWidth="916.0" spacing="30.0">
             <children>
                 <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Hiraya Desk" wrappingWidth="841.06103515625">
@@ -43,7 +71,7 @@
                         <Font size="45.0" />
                     </font>
                 </MFXPasswordField>
-                <MFXButton fx:id="loginBtn" onAction="#handleLogin" prefHeight="113.0" prefWidth="193.0" style="-fx-background-color: #1B4137;" text="Login" textFill="WHITE">
+                <MFXButton fx:id="loginBtn" onAction="#handleLogin" prefHeight="113.0" prefWidth="193.0" style="-fx-background-color: #1B4137;" styleClass="mfx-button" text="Login" textFill="WHITE">
                     <font>
                         <Font name="Candara" size="30.0" />
                     </font>

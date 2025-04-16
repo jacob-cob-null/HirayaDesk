@@ -6,7 +6,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : Apr 15, 2025, 8:10:29 PM
     Author     : Jacob
 */
-.mfx-text-field .floating-label {
-    -fx-font-size: 30px;
-    -fx-text-fill: #4CAF50;  /* Set the desired color for the floating label */
+.mfx-button {
+    -fx-background-color:red;
 }
