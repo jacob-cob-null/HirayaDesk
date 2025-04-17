@@ -50,10 +50,16 @@ public class ReservationController implements Initializable {
     private MFXButton newDelete;
 
     @FXML
+    private MFXButton newUpdate;
+
+    @FXML
     private MFXButton cancel1;
 
     @FXML
     private MFXButton cancel3;
+
+    @FXML
+    private MFXButton cancel2;
 
     @FXML
     private StackPane createOverlay;
@@ -62,7 +68,13 @@ public class ReservationController implements Initializable {
     private StackPane deleteOverlay;
 
     @FXML
+    private StackPane updateOverlay;
+
+    @FXML
     private MFXComboBox reservationCombo;
+
+    @FXML
+    private MFXComboBox reservationCombo2;
 
     // Observable list to hold Villa objects
     private ObservableList<Reservation> reservationData = FXCollections.observableArrayList();
@@ -113,7 +125,6 @@ public class ReservationController implements Initializable {
                 + "-fx-font-size: 20px;"
         );
 
-
         //cell width
         idColumn.setPrefWidth(150);
         nameColumn.setPrefWidth(160);
@@ -124,8 +135,22 @@ public class ReservationController implements Initializable {
         endDateColumn.setPrefWidth(170);
         priceColumn.setPrefWidth(160);
 
-
         reservationTable.getTableColumns().addAll(idColumn, nameColumn, contactColumn, villaIDColumn, durationColumn, startDateColumn, endDateColumn, priceColumn);
+    }
+
+    private void setupListeners() {
+        //CREATE 
+        createBtn.setOnAction(event -> {
+            createOverlay.setVisible(true);
+        });
+        //UPDATE
+        updateBtn.setOnAction(event -> {
+            updateOverlay.setVisible(true);
+        });
+        //DELETE
+        deleteBtn.setOnAction(event -> {
+            deleteOverlay.setVisible(true);
+        });
     }
 
     private void refreshTable() {
