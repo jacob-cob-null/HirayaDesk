@@ -1,23 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.ReservationController">
    <children>
-      <StackPane alignment="CENTER_LEFT" layoutX="-29.0" layoutY="-1.0" prefHeight="96.0" prefWidth="1712.0" style="-fx-background-color: #b8dbc4;">
+      <StackPane>
          <children>
-            <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservations">
-               <font>
-                  <Font name="Arial Bold" size="50.0" />
-               </font>
-               <StackPane.margin>
-                  <Insets bottom="20.0" left="50.0" top="20.0" />
-               </StackPane.margin>
-            </Text>
+            <AnchorPane>
+               <children>
+                  <StackPane layoutX="-13.0" layoutY="-11.0" prefHeight="680.0" prefWidth="1696.0" />
+                  <StackPane alignment="CENTER_LEFT" layoutX="-29.0" prefHeight="96.0" prefWidth="1712.0" style="-fx-background-color: #b8dbc4;">
+                     <children>
+                        <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservations">
+                           <font>
+                              <Font name="Arial Bold" size="50.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets bottom="20.0" left="50.0" top="20.0" />
+                           </StackPane.margin>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <MFXTableView fx:id="reservationTable" depthTest="ENABLE" layoutX="24.0" layoutY="127.0" prefHeight="810.0" prefWidth="1519.0" />
+                  <HBox alignment="CENTER_RIGHT" layoutX="1123.0" layoutY="930.0" prefHeight="100.0" prefWidth="420.0" spacing="20.0">
+                     <children>
+                        <MFXButton fx:id="createBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #1b4137;" text="Create" textFill="WHITE">
+                           <font>
+                              <Font name="Calibri Bold" size="24.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton fx:id="updateBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #2f4aa3;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Calibri Bold" size="24.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton fx:id="deleteBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #b81f1f;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Calibri Bold" size="24.0" />
+                           </font>
+                        </MFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0" visible="false">
+               <children>
+                  <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
+                     <bottom>
+                        <VBox fx:id="dialogVBox" alignment="TOP_CENTER" prefHeight="830.0" prefWidth="495.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 30px;" BorderPane.alignment="CENTER">
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Reservation Record">
+                                 <font>
+                                    <Font size="39.0" />
+                                 </font>
+                              </Text>
+                              <MFXComboBox fx:id="tierCombo" floatingText="Enter Room Tier" minHeight="-Infinity" prefHeight="38.0" prefWidth="285.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="50.0" />
+                                 </VBox.margin>
+                              </MFXComboBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <MFXButton fx:id="cancel1" prefHeight="45.0" prefWidth="151.0" style="-fx-border-color: #1b4137; -fx-background-color: white; -fx-border-width: 1;" text="Cancel">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="newRecord" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" text="Create" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </bottom>
+                     <top>
+                        <VBox prefHeight="0.0" prefWidth="433.0" BorderPane.alignment="CENTER" />
+                     </top>
+                  </MFXGenericDialog>
+               </children>
+               <effect>
+                  <DropShadow height="30.0" radius="14.5" width="30.0">
+                     <color>
+                        <Color red="0.4736842215061188" green="0.4736842215061188" blue="0.4736842215061188" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </StackPane>
+            <StackPane fx:id="deleteOverlay" layoutX="10.0" layoutY="10.0" prefHeight="1096.0" prefWidth="1683.0" visible="false">
+               <children>
+                  <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
+                     <bottom>
+                        <VBox alignment="TOP_CENTER" prefHeight="335.0" prefWidth="433.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 30px;" BorderPane.alignment="CENTER">
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Reservation Record">
+                                 <font>
+                                    <Font size="39.0" />
+                                 </font>
+                              </Text>
+                              <MFXComboBox fx:id="reservationCombo" floatingText="Enter Reservation ID" minHeight="-Infinity" prefHeight="38.0" prefWidth="285.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="50.0" />
+                                 </VBox.margin>
+                              </MFXComboBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <MFXButton fx:id="cancel3" prefHeight="45.0" prefWidth="151.0" style="-fx-border-color: #1b4137; -fx-background-color: white; -fx-border-width: 1;" text="Cancel">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                    <MFXButton fx:id="newDelete" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #b81f1f;" text="Delete" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="24.0" />
+                                       </font>
+                                    </MFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </bottom>
+                     <top>
+                        <VBox prefHeight="0.0" prefWidth="433.0" BorderPane.alignment="CENTER" />
+                     </top>
+                  </MFXGenericDialog>
+               </children>
+               <effect>
+                  <DropShadow height="30.0" radius="14.5" width="30.0">
+                     <color>
+                        <Color red="0.4736842215061188" green="0.4736842215061188" blue="0.4736842215061188" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </StackPane>
          </children>
       </StackPane>
    </children>

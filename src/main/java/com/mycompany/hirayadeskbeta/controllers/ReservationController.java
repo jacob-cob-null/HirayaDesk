@@ -4,9 +4,14 @@
  */
 package com.mycompany.hirayadeskbeta.controllers;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXTableView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -15,9 +20,26 @@ import javafx.fxml.Initializable;
  */
 public class ReservationController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+
+    @FXML 
+    private MFXTableView reservationTable;
+    
+    @FXML
+    private MFXButton createBtn ;
+    private MFXButton updateBtn;
+    private MFXButton deleteBtn;
+    
+    private MFXButton newCreate;
+    private MFXButton newDelete;
+    
+    private MFXButton cancel1;
+    private MFXButton cancel3;
+    
+    private StackPane createOverlay;
+    private StackPane deleteOverlay;
+    
+    private MFXComboBox reservationCombo;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

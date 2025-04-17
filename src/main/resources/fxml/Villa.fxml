@@ -47,12 +47,12 @@
                         
                         <HBox alignment="CENTER_RIGHT" layoutX="1123.0" layoutY="930.0" prefHeight="100.0" prefWidth="420.0" spacing="20.0">
                             <children>
-                                <MFXButton fx:id="deleteBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #b81f1f;" text="Delete" textFill="WHITE">
+                                <MFXButton fx:id="createBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #1b4137;" text="Create" textFill="WHITE">
                                     <font>
                                         <Font name="Calibri Bold" size="24.0" />
                                     </font>
                                 </MFXButton>
-                                <MFXButton fx:id="createBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #3DD37B;" text="Create" textFill="WHITE">
+                                <MFXButton fx:id="deleteBtn" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #b81f1f;" text="Delete" textFill="WHITE">
                                     <font>
                                         <Font name="Calibri Bold" size="24.0" />
                                     </font>
@@ -63,7 +63,7 @@
                 </AnchorPane>
 
                 <!-- New StackPane for overlay (hidden by default) -->
-                <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0">
+                <StackPane fx:id="createOverlay" prefHeight="1096.0" prefWidth="1683.0" visible="false">
                     <children>
                         <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
                             <bottom>
