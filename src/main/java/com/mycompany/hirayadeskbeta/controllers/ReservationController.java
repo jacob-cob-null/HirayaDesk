@@ -81,6 +81,7 @@ public class ReservationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        setupListeners();
         setupTable();
         try {
             ReservationDBcontroller.mapReservation();
@@ -143,13 +144,22 @@ public class ReservationController implements Initializable {
         createBtn.setOnAction(event -> {
             createOverlay.setVisible(true);
         });
+        cancel1.setOnAction(event -> {
+            createOverlay.setVisible(false);
+        });
         //UPDATE
         updateBtn.setOnAction(event -> {
             updateOverlay.setVisible(true);
         });
+        cancel2.setOnAction(event -> {
+            updateOverlay.setVisible(false);
+        });
         //DELETE
         deleteBtn.setOnAction(event -> {
             deleteOverlay.setVisible(true);
+        });
+        cancel3.setOnAction(event -> {
+            deleteOverlay.setVisible(false);
         });
     }
 
