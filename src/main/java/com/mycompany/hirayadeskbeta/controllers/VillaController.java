@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 import database.VillaDBcontroller;  // Import VillaDBcontroller
 import database.objects.Villa;    // Import Villa class
+import io.github.palexdev.materialfx.filter.StringFilter;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -82,16 +83,29 @@ public class VillaController implements Initializable {
         tierColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Villa::getTierID));
         availableColumn.setRowCellFactory(v -> new MFXTableRowCell<>(villa -> villa.isAvailable() ? "Available" : "Not Available"));
 
-        idColumn.setStyle("-fx-font-size: 16px;");
-        tierColumn.setStyle("-fx-font-size: 16px;");
-        availableColumn.setStyle("-fx-font-size: 16px;");
-        villaTable.setStyle("-fx-font-size: 16px;");
+        villaTable.setStyle(
+                "-fx-background-color: white;"
+                + "-fx-border-color: #1B4137;"
+                + "-fx-border-radius: 10px;"
+                + "-fx-background-radius: 10px;"
+                + "-fx-border-width: 3px;"
+                + "-fx-padding: 30px;"
+                + "-fx-font-size: 20px;"
+        );
 
-        idColumn.setPrefWidth(100);
+        //Cell width
+        idColumn.setPrefWidth(120);
         tierColumn.setPrefWidth(200);
         availableColumn.setPrefWidth(200);
 
         villaTable.getTableColumns().addAll(idColumn, tierColumn, availableColumn);
+
+
+        villaTable.getFilters().addAll(
+                new StringFilter<>("Tier", Villa::getTierID),
+                new StringFilter<>("Availability", villa -> villa.isAvailable() ? "Available" : "Not Available")
+        );
+
     }
 
     private void setupListeners() {
@@ -119,7 +133,7 @@ public class VillaController implements Initializable {
             }
 
         });
-        
+
         deleteBtn.setOnAction(event -> {
             loadVillaIDsToComboBox();
             deleteOverlay.setVisible(true);

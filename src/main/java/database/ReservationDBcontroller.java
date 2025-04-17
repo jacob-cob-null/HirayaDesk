@@ -28,7 +28,7 @@ public class ReservationDBcontroller {
         rawReservationData.clear();
 
         Connection conn = MainDB.connect();
-        String query = "SELECT * FROM Reservation";
+        String query = "SELECT * FROM Reservation ORDER BY endDate DESC";
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             ResultSet rs = pstmt.executeQuery();

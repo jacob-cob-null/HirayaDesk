@@ -17,7 +17,10 @@ import database.objects.Reservation;
 import database.objects.Villa;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.IntegerFilter;
+import io.github.palexdev.materialfx.filter.StringFilter;
 import java.sql.SQLException;
+import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -77,14 +80,14 @@ public class ReservationController implements Initializable {
 
     private void setupTable() {
 
-        MFXTableColumn<Reservation> idColumn = new MFXTableColumn<>("Reservation ID");
-        MFXTableColumn<Reservation> nameColumn = new MFXTableColumn<>("Name");
-        MFXTableColumn<Reservation> contactColumn = new MFXTableColumn<>("Contact Number");
-        MFXTableColumn<Reservation> villaIDColumn = new MFXTableColumn<>("Villa");
-        MFXTableColumn<Reservation> durationColumn = new MFXTableColumn<>("Duration");
-        MFXTableColumn<Reservation> startDateColumn = new MFXTableColumn<>("Start Date");
-        MFXTableColumn<Reservation> endDateColumn = new MFXTableColumn<>("End Date");
-        MFXTableColumn<Reservation> priceColumn = new MFXTableColumn<>("Price");
+        MFXTableColumn<Reservation> idColumn = new MFXTableColumn<>("Reservation ID", true);
+        MFXTableColumn<Reservation> nameColumn = new MFXTableColumn<>("Name", true);
+        MFXTableColumn<Reservation> contactColumn = new MFXTableColumn<>("Contact Number", true);
+        MFXTableColumn<Reservation> villaIDColumn = new MFXTableColumn<>("Villa", true);
+        MFXTableColumn<Reservation> durationColumn = new MFXTableColumn<>("Duration", true);
+        MFXTableColumn<Reservation> startDateColumn = new MFXTableColumn<>("Start Date", true);
+        MFXTableColumn<Reservation> endDateColumn = new MFXTableColumn<>("End Date", true);
+        MFXTableColumn<Reservation> priceColumn = new MFXTableColumn<>("Price", true);
 
         idColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getReservationID));
         nameColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getCustName));
@@ -92,21 +95,35 @@ public class ReservationController implements Initializable {
         villaIDColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getVillaID));
         durationColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getDuration));
         startDateColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getStartDate));
-        endDateColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getStartDate));
-        priceColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getEndDate));
+        endDateColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getEndDate));
+        priceColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getPrice));
 
-        idColumn.setStyle("-fx-font-size: 16px;");
+        reservationTable.getFilters().addAll(
+                new IntegerFilter<>("Duration", Reservation::getDuration),
+                new IntegerFilter<>("Price", Reservation::getPrice)
+        );
 
-        reservationTable.setStyle("-fx-font-size: 16px;");
+        reservationTable.setStyle(
+                "-fx-background-color: white;"
+                + "-fx-border-color: #1B4137;"
+                + "-fx-border-radius: 10px;"
+                + "-fx-background-radius: 10px;"
+                + "-fx-border-width: 3px;"
+                + "-fx-padding: 30px;"
+                + "-fx-font-size: 20px;"
+        );
 
-        idColumn.setPrefWidth(80);
+
+        //cell width
+        idColumn.setPrefWidth(150);
         nameColumn.setPrefWidth(160);
-        contactColumn.setPrefWidth(130);
-        villaIDColumn.setPrefWidth(70);
-        durationColumn.setPrefWidth(70);
-        startDateColumn.setPrefWidth(120);
-        endDateColumn.setPrefWidth(120);
-        priceColumn.setPrefWidth(110);
+        contactColumn.setPrefWidth(180);
+        villaIDColumn.setPrefWidth(100);
+        durationColumn.setPrefWidth(100);
+        startDateColumn.setPrefWidth(170);
+        endDateColumn.setPrefWidth(170);
+        priceColumn.setPrefWidth(160);
+
 
         reservationTable.getTableColumns().addAll(idColumn, nameColumn, contactColumn, villaIDColumn, durationColumn, startDateColumn, endDateColumn, priceColumn);
     }
