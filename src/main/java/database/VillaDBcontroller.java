@@ -20,6 +20,7 @@ public class VillaDBcontroller {
 
     public static List<Villa> rawVillaData = new ArrayList<>();
 
+    //Mapping Villa table to tableView
     public static void mapVilla() throws SQLException {
         rawVillaData.clear();
 

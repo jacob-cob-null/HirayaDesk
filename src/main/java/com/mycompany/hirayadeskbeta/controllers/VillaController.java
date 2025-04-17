@@ -70,8 +70,6 @@ public class VillaController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        createOverlay.setVisible(false);
     }
 
     private void setupTable() {
