@@ -60,7 +60,7 @@ public class VillaDBcontroller {
     public static List<Integer> getAllVillaIDs() throws SQLException {
         List<Integer> villaIDs = new ArrayList<>();
         Connection conn = MainDB.connect();
-        String query = "SELECT villaID FROM Villa";
+        String query = "SELECT villaID FROM Villa WHERE availability = 1";
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             ResultSet rs = pstmt.executeQuery();
