@@ -115,18 +115,18 @@ public class VillaDBcontroller {
         }
     }
 
-    public static void updateVillaStatus(int villaID) throws SQLException {
+    public static void updateVillaStatus(int villaID, int num) throws SQLException {
         Connection conn = MainDB.connect();
-        String updateQuery = "UPDATE Villa SET availability = 0 WHERE villaID = ?";  
+        String updateQuery = "UPDATE Villa SET availability = ? WHERE villaID = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
-            pstmt.setInt(1, villaID);
-            int rowsAffected = pstmt.executeUpdate(); 
+            pstmt.setInt(1, num);  // 0 = unavailable, 1 = available
+            pstmt.setInt(2, villaID);
+            int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-
                 for (Villa villa : rawVillaData) {
                     if (villa.getVillaID() == villaID) {
-                        villa.setAvailability(false);
+                        villa.setAvailability(num == 1); // true if available, false if not
                         break;
                     }
                 }

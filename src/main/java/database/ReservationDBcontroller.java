@@ -64,7 +64,6 @@ public class ReservationDBcontroller {
         try (
                 PreparedStatement joinStmt = conn.prepareStatement(joinQuery); PreparedStatement insertStmt = conn.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-
             joinStmt.setInt(1, villaID);
             ResultSet rs = joinStmt.executeQuery();
 
@@ -97,6 +96,52 @@ public class ReservationDBcontroller {
         }
     }
 
+    public static void updateReservation(int reservationID, String name, String contact, int villaID, int duration, LocalDate startDate) {
+        Connection conn = MainDB.connect();
+        String priceQuery = "SELECT t.price FROM Villa v JOIN Tier t ON v.tierID = t.tierID WHERE v.villaID = ?";
+        String updateQuery = "UPDATE Reservation SET custName = ?, custContactNumber = ?, villaID = ?, duration = ?, startDate = ?, endDate = ?, price = ? WHERE reservationID = ?";
+
+        try (
+                PreparedStatement priceStmt = conn.prepareStatement(priceQuery); PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+            priceStmt.setInt(1, villaID);
+            ResultSet rs = priceStmt.executeQuery();
+
+            if (rs.next()) {
+                int pricePerDay = rs.getInt("price");
+                int totalPrice = pricePerDay * duration;
+                LocalDate endDate = startDate.plusDays(duration);
+
+                updateStmt.setString(1, name);
+                updateStmt.setString(2, contact);
+                updateStmt.setInt(3, villaID);
+                updateStmt.setInt(4, duration);
+                updateStmt.setString(5, startDate.toString());
+                updateStmt.setString(6, endDate.toString());
+                updateStmt.setInt(7, totalPrice);
+                updateStmt.setInt(8, reservationID);
+                updateStmt.executeUpdate();
+
+                // Optional: update in-memory object if needed
+                for (Reservation res : rawReservationData) {
+                    if (res.getReservationID() == reservationID) {
+                        res.setCustName(name);
+                        res.setCustContactNumber(contact);
+                        res.setVillaID(villaID);
+                        res.setDuration(duration);
+                        res.setStartDate(startDate);
+                        res.setEndDate(endDate);
+                        res.setPrice(totalPrice);
+                        break;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
+    }
+
     //Delete
     public static void deleteReservation(int id) throws SQLException {
         Connection conn = MainDB.connect();
@@ -112,7 +157,7 @@ public class ReservationDBcontroller {
         }
     }
 
-    //get villaID
+    //get reservationID
     public static List<Integer> getAllReservationIDs() throws SQLException {
         List<Integer> reservationIDs = new ArrayList<>();
         Connection conn = MainDB.connect();
@@ -130,5 +175,6 @@ public class ReservationDBcontroller {
         }
         return reservationIDs;
     }
+    
 
 }

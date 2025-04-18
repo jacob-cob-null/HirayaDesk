@@ -164,7 +164,12 @@ public class VillaController implements Initializable {
         });
     }
 
-    public static void loadVillaIDsToComboBox(MFXFilterComboBox combo) {
+    public static void loadVillaIDsToComboBox(MFXFilterComboBox<Integer> combo) {
+        if (combo == null) {
+            Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "ComboBox is null in loadVillaIDsToComboBox");
+            return;
+        }
+
         try {
             List<Integer> villaIDs = VillaDBcontroller.getAllVillaIDs();
             combo.setItems(FXCollections.observableArrayList(villaIDs));

@@ -34,6 +34,7 @@ public class Reservation {
         this.price = price;
     }
 
+    //getters
     public int getReservationID() {
         return reservationID;
     }
@@ -64,5 +65,34 @@ public class Reservation {
 
     public int getPrice() {
         return price;
+    }
+
+    //setters
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
+    public void setCustContactNumber(String custContactNumber) {
+        this.custContactNumber = custContactNumber;
+    }
+
+    public void setVillaID(int villaID) {
+        this.villaID = villaID;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
