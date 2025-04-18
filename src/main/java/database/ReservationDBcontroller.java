@@ -55,8 +55,8 @@ public class ReservationDBcontroller {
         }
     }
 
-    //CREATE Reservation Record
-    public static void createWithJoin(String name, String contact, int villaID, int duration, String startDateStr, String endDateStr) {
+    // CREATE Reservation Record
+    public static void createReservation(String name, String contact, int villaID, int duration, LocalDate startDate) {
         Connection conn = MainDB.connect();
         String joinQuery = "SELECT t.price FROM Villa v JOIN Tier t ON v.tierID = t.tierID WHERE v.villaID = ?";
         String insertQuery = "INSERT INTO Reservation (custName, custContactNumber, villaID, duration, startDate, endDate, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -64,24 +64,24 @@ public class ReservationDBcontroller {
         try (
                 PreparedStatement joinStmt = conn.prepareStatement(joinQuery); PreparedStatement insertStmt = conn.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
+
             joinStmt.setInt(1, villaID);
             ResultSet rs = joinStmt.executeQuery();
 
             if (rs.next()) {
+
                 int pricePerDay = rs.getInt("price");
                 int totalPrice = pricePerDay * duration;
+                LocalDate endDate = startDate.plusDays(duration);
 
                 insertStmt.setString(1, name);
                 insertStmt.setString(2, contact);
                 insertStmt.setInt(3, villaID);
                 insertStmt.setInt(4, duration);
-                insertStmt.setString(5, startDateStr);
-                insertStmt.setString(6, endDateStr);
+                insertStmt.setString(5, startDate.toString());  // Start date in yyyy-MM-dd format
+                insertStmt.setString(6, endDate.toString());    // End date in yyyy-MM-dd format
                 insertStmt.setInt(7, totalPrice);
                 insertStmt.executeUpdate();
-
-                LocalDate startDate = LocalDate.parse(startDateStr);
-                LocalDate endDate = startDate.plusDays(duration);
 
                 ResultSet generatedKeys = insertStmt.getGeneratedKeys();
                 if (generatedKeys.next()) {
@@ -96,7 +96,7 @@ public class ReservationDBcontroller {
             MainDB.closeConnection(conn);
         }
     }
-    
+
     //Delete
     public static void deleteReservation(int id) throws SQLException {
         Connection conn = MainDB.connect();

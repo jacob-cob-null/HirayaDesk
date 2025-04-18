@@ -98,7 +98,7 @@ public class VillaDBcontroller {
         String insertQuery = "INSERT INTO Villa (tierID, availability) VALUES (?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, tier);
-            pstmt.setInt(2, 1); 
+            pstmt.setInt(2, 1);
             pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
@@ -107,6 +107,29 @@ public class VillaDBcontroller {
 
                 Villa villa = new Villa(villaID, tier, true);
                 rawVillaData.add(villa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
+    }
+
+    public static void updateVillaStatus(int villaID) throws SQLException {
+        Connection conn = MainDB.connect();
+        String updateQuery = "UPDATE Villa SET availability = 0 WHERE villaID = ?";  
+
+        try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+            pstmt.setInt(1, villaID);
+            int rowsAffected = pstmt.executeUpdate(); 
+            if (rowsAffected > 0) {
+
+                for (Villa villa : rawVillaData) {
+                    if (villa.getVillaID() == villaID) {
+                        villa.setAvailability(false);
+                        break;
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

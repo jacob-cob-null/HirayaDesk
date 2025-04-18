@@ -30,4 +30,7 @@ public class Villa {
     public boolean isAvailable() {
         return availability;
     }
+    public boolean setAvailability(boolean state) {
+        return this.availability = state;
+    }
 }

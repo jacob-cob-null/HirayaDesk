@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 import database.VillaDBcontroller;  // Import VillaDBcontroller
 import database.objects.Villa;    // Import Villa class
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import java.net.URL;
 import java.sql.SQLException;
@@ -49,7 +50,7 @@ public class VillaController implements Initializable {
     private MFXComboBox<String> tierCombo;
 
     @FXML
-    private MFXComboBox<Integer> villaCombo;
+    private MFXFilterComboBox<Integer> villaCombo;
 
     @FXML
     private MFXButton newRecord;
@@ -100,7 +101,6 @@ public class VillaController implements Initializable {
 
         villaTable.getTableColumns().addAll(idColumn, tierColumn, availableColumn);
 
-
         villaTable.getFilters().addAll(
                 new StringFilter<>("Tier", Villa::getTierID),
                 new StringFilter<>("Availability", villa -> villa.isAvailable() ? "Available" : "Not Available")
@@ -135,7 +135,7 @@ public class VillaController implements Initializable {
         });
 
         deleteBtn.setOnAction(event -> {
-            loadVillaIDsToComboBox();
+            loadVillaIDsToComboBox(villaCombo);
             deleteOverlay.setVisible(true);
         });
         cancel1.setOnAction(event -> {
@@ -155,7 +155,7 @@ public class VillaController implements Initializable {
             try {
                 VillaDBcontroller.deleteVilla(selectedID);
                 deleteOverlay.setVisible(false);
-                loadVillaIDsToComboBox();
+                loadVillaIDsToComboBox(villaCombo);
                 villaCombo.getSelectionModel().clearSelection();
                 refreshTable();
             } catch (SQLException ex) {
@@ -164,10 +164,10 @@ public class VillaController implements Initializable {
         });
     }
 
-    private void loadVillaIDsToComboBox() {
+    public static void loadVillaIDsToComboBox(MFXFilterComboBox combo) {
         try {
             List<Integer> villaIDs = VillaDBcontroller.getAllVillaIDs();
-            villaCombo.setItems(FXCollections.observableArrayList(villaIDs));
+            combo.setItems(FXCollections.observableArrayList(villaIDs));
         } catch (SQLException e) {
             e.printStackTrace();
         }

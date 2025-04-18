@@ -2,7 +2,10 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.effect.DropShadow?>
@@ -65,24 +68,47 @@
                     <children>
                         <MFXGenericDialog prefHeight="400.0" prefWidth="600.0">
                             <bottom>
-                                <VBox alignment="TOP_CENTER" prefHeight="830.0" prefWidth="495.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 30px;" BorderPane.alignment="CENTER">
+                                <VBox alignment="TOP_CENTER" prefHeight="593.0" prefWidth="495.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 30px;" BorderPane.alignment="CENTER">
                                     <padding>
                                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                     </padding>
                                     <children>
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Reservation Record">
                                             <font>
-                                                <Font size="39.0" />
+                                                <Font size="35.0" />
                                             </font>
                                         </Text>
-                                        <MFXComboBox fx:id="tierCombo" floatingText="Enter Room Tier" minHeight="-Infinity" prefHeight="38.0" prefWidth="285.0">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                            <VBox.margin>
-                                                <Insets top="50.0" />
-                                            </VBox.margin>
-                                        </MFXComboBox>
+                              <VBox alignment="CENTER" prefHeight="359.0" prefWidth="455.0" spacing="10.0">
+                                 <children>
+                                    <MFXTextField fx:id="nameInput" prefHeight="49.0" prefWidth="290.0" promptText="Customer Name">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </MFXTextField>
+                                    <MFXTextField fx:id="contactInput" prefHeight="49.0" prefWidth="290.0" promptText="Contact Number">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </MFXTextField>
+                                    <MFXFilterComboBox fx:id="villaCombo" prefHeight="49.0" prefWidth="290.0" promptText="Villa">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </MFXFilterComboBox>
+                                    <MFXTextField fx:id="durationInput" prefHeight="49.0" prefWidth="290.0" promptText="Duration of Stay">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </MFXTextField>
+                                    <MFXDatePicker fx:id="dateInput" prefHeight="38.0" prefWidth="290.0" promptText="Start Date" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </VBox>
                                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                             <children>
                                                 <MFXButton fx:id="cancel1" prefHeight="45.0" prefWidth="151.0" style="-fx-border-color: #1b4137; -fx-background-color: white; -fx-border-width: 1;" text="Cancel">
@@ -90,7 +116,7 @@
                                                         <Font name="Calibri Bold" size="24.0" />
                                                     </font>
                                                 </MFXButton>
-                                                <MFXButton fx:id="newRecord" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" text="Create" textFill="WHITE">
+                                                <MFXButton fx:id="newCreate" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #1b4137;" text="Create" textFill="WHITE">
                                                     <font>
                                                         <Font name="Calibri Bold" size="24.0" />
                                                     </font>
