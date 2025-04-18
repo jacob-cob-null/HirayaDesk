@@ -54,7 +54,7 @@ public class ReservationDBcontroller {
             MainDB.closeConnection(conn);
         }
     }
-    
+
     //CREATE Reservation Record
     public static void createWithJoin(String name, String contact, int villaID, int duration, String startDateStr, String endDateStr) {
         Connection conn = MainDB.connect();
@@ -62,7 +62,7 @@ public class ReservationDBcontroller {
         String insertQuery = "INSERT INTO Reservation (custName, custContactNumber, villaID, duration, startDate, endDate, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (
-            PreparedStatement joinStmt = conn.prepareStatement(joinQuery); PreparedStatement insertStmt = conn.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement joinStmt = conn.prepareStatement(joinQuery); PreparedStatement insertStmt = conn.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             joinStmt.setInt(1, villaID);
             ResultSet rs = joinStmt.executeQuery();
@@ -89,12 +89,46 @@ public class ReservationDBcontroller {
                     Reservation reservation = new Reservation(reservationID, name, contact, villaID, duration, startDate, endDate, totalPrice);
                     rawReservationData.add(reservation);
                 }
-            } 
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             MainDB.closeConnection(conn);
         }
+    }
+    
+    //Delete
+    public static void deleteReservation(int id) throws SQLException {
+        Connection conn = MainDB.connect();
+        String query = "DELETE FROM Reservation WHERE reservationID = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, id);
+            rawReservationData.removeIf(Reservation -> Reservation.getReservationID() == id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
+    }
+
+    //get villaID
+    public static List<Integer> getAllReservationIDs() throws SQLException {
+        List<Integer> reservationIDs = new ArrayList<>();
+        Connection conn = MainDB.connect();
+        String query = "SELECT reservationID FROM Reservation";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                reservationIDs.add(rs.getInt("reservationID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
+        return reservationIDs;
     }
 
 }

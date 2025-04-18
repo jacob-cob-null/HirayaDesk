@@ -21,6 +21,9 @@ import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import java.sql.SQLException;
 import java.util.Comparator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -157,10 +160,36 @@ public class ReservationController implements Initializable {
         //DELETE
         deleteBtn.setOnAction(event -> {
             deleteOverlay.setVisible(true);
+            loadReservationIDsToComboBox();
         });
         cancel3.setOnAction(event -> {
             deleteOverlay.setVisible(false);
         });
+        newDelete.setOnAction(event -> {
+            Integer selectedID = (Integer) reservationCombo.getValue();
+            if (selectedID == null) {
+                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Villa selected for deletion.");
+                return;
+            }
+            try {
+                ReservationDBcontroller.deleteReservation(selectedID);
+                deleteOverlay.setVisible(false);
+                loadReservationIDsToComboBox();
+                reservationCombo.getSelectionModel().clearSelection();
+                refreshTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
+    private void loadReservationIDsToComboBox() {
+        try {
+            List<Integer> reservationIDs = ReservationDBcontroller.getAllReservationIDs();
+            reservationCombo.setItems(FXCollections.observableArrayList(reservationIDs));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void refreshTable() {
