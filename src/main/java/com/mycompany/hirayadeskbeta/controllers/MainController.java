@@ -40,6 +40,7 @@ public class MainController implements Initializable {
 
         AnchorPane calendar = FXMLLoader.load(getClass().getResource("/fxml/Calendar.fxml"));
         contentPane.getChildren().setAll(calendar);
+
     }
 
     @FXML

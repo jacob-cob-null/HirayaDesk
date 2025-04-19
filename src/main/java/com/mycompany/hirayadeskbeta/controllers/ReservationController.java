@@ -216,6 +216,7 @@ public class ReservationController implements Initializable {
             LocalDate startDate = LocalDate.parse(startDateStr, formatter);
 
             ReservationDBcontroller.createReservation(name, contact, villa, duration, startDate);
+
             try {
                 VillaDBcontroller.updateVillaStatus(villa, 0);
             } catch (SQLException ex) {

@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.calendarfx.view.CalendarView?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.hirayadeskbeta.controllers.MainController">
+<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.CalendarController">
    <children>
-      <Text layoutX="34.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
+      <StackPane alignment="CENTER_LEFT" layoutX="-28.0" layoutY="-3.0" prefHeight="96.0" prefWidth="1712.0" style="-fx-background-color: #b8dbc4;">
+         <children>
+            <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
+               <font>
+                  <Font name="Arial Bold" size="50.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="20.0" left="50.0" top="20.0" />
+               </StackPane.margin>
+            </Text>
+         </children>
+      </StackPane>
+      <CalendarView fx:id="calendarView" layoutX="14.0" layoutY="121.0" prefHeight="833.0" prefWidth="1543.0" selectionMode="SINGLE" />
+      <MFXButton fx:id="refreshCalendar" layoutX="1382.0" layoutY="974.0" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #1B4137;" text="Refresh" textFill="WHITE">
          <font>
-            <Font size="22.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
-      </Text>
+      </MFXButton>
    </children>
 </AnchorPane>
