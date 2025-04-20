@@ -20,9 +20,10 @@ public class Reservation {
     LocalDate startDate;
     LocalDate endDate;
     int price;
+    String status;
 
     public Reservation(int reservationID, String custName, String custContactNumber, int villaID,
-            int duration, LocalDate startDate, LocalDate endDate, int price) {
+            int duration, LocalDate startDate, LocalDate endDate, int price, String status) {
 
         this.reservationID = reservationID;
         this.custName = custName;
@@ -32,6 +33,7 @@ public class Reservation {
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
+        this.status = status;
     }
 
     //getters
@@ -66,6 +68,9 @@ public class Reservation {
     public int getPrice() {
         return price;
     }
+    public String getStatus() {
+        return status;
+    }
 
     //setters
     public void setCustName(String custName) {
@@ -94,5 +99,9 @@ public class Reservation {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

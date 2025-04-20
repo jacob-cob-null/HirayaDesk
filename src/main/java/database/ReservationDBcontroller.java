@@ -45,13 +45,33 @@ public class ReservationDBcontroller {
                 //convert dates to local date
                 LocalDate startDate = LocalDate.parse(startDateStr);
                 LocalDate endDate = LocalDate.parse(endDateStr);
+
                 rawReservationData.add(new Reservation(reservationID, custName, custContactNumber,
-                        villaID, duration, startDate, endDate, price));
+                        villaID, duration, startDate, endDate, price, addStatus(endDate)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             MainDB.closeConnection(conn);
+        }
+    }
+
+    //Add status
+    public static String addStatus(LocalDate endDate) {
+        String status;
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.isBefore(endDate)) {
+            status = "ongoing";
+        } else {
+            status = "complete";
+        }
+        return status;
+    }
+
+    //Check status
+    public static void updateStatus() {
+        for (Reservation res : rawReservationData) {
+            res.setStatus(addStatus(res.getEndDate()));
         }
     }
 
@@ -85,7 +105,7 @@ public class ReservationDBcontroller {
                 ResultSet generatedKeys = insertStmt.getGeneratedKeys();
                 if (generatedKeys.next()) {
                     int reservationID = generatedKeys.getInt(1);
-                    Reservation reservation = new Reservation(reservationID, name, contact, villaID, duration, startDate, endDate, totalPrice);
+                    Reservation reservation = new Reservation(reservationID, name, contact, villaID, duration, startDate, endDate, totalPrice, addStatus(endDate));
                     rawReservationData.add(reservation);
                 }
             }
@@ -121,7 +141,6 @@ public class ReservationDBcontroller {
                 updateStmt.setInt(8, reservationID);
                 updateStmt.executeUpdate();
 
-                // Optional: update in-memory object if needed
                 for (Reservation res : rawReservationData) {
                     if (res.getReservationID() == reservationID) {
                         res.setCustName(name);
@@ -175,6 +194,5 @@ public class ReservationDBcontroller {
         }
         return reservationIDs;
     }
-    
 
 }

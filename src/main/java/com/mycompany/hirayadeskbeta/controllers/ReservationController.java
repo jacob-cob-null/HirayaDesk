@@ -139,6 +139,7 @@ public class ReservationController implements Initializable {
         MFXTableColumn<Reservation> startDateColumn = new MFXTableColumn<>("Start Date", true);
         MFXTableColumn<Reservation> endDateColumn = new MFXTableColumn<>("End Date", true);
         MFXTableColumn<Reservation> priceColumn = new MFXTableColumn<>("Price", true);
+        MFXTableColumn<Reservation> statusColumn = new MFXTableColumn<>("Status", true);
 
         idColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getReservationID));
         nameColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getCustName));
@@ -148,11 +149,13 @@ public class ReservationController implements Initializable {
         startDateColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getStartDate));
         endDateColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getEndDate));
         priceColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getPrice));
+        statusColumn.setRowCellFactory(v -> new MFXTableRowCell<>(Reservation::getStatus));
 
         reservationTable.getFilters().addAll(
                 new StringFilter<>("Name", Reservation::getCustName),
                 new IntegerFilter<>("Duration", Reservation::getDuration),
-                new IntegerFilter<>("Price", Reservation::getPrice)
+                new IntegerFilter<>("Price", Reservation::getPrice),
+                new StringFilter<>("Status", Reservation::getStatus)
         );
 
         reservationTable.setStyle(
@@ -174,8 +177,9 @@ public class ReservationController implements Initializable {
         startDateColumn.setPrefWidth(170);
         endDateColumn.setPrefWidth(170);
         priceColumn.setPrefWidth(160);
+        statusColumn.setPrefWidth(120);
 
-        reservationTable.getTableColumns().addAll(idColumn, nameColumn, contactColumn, villaIDColumn, durationColumn, startDateColumn, endDateColumn, priceColumn);
+        reservationTable.getTableColumns().addAll(idColumn, nameColumn, contactColumn, villaIDColumn, durationColumn, startDateColumn, endDateColumn, priceColumn, statusColumn);
     }
 
     private void setupListeners() {

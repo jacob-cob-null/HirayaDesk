@@ -32,7 +32,7 @@ public class MainController implements Initializable {
     @FXML
     public void showDashboard() throws Exception {
         AnchorPane dashboard = FXMLLoader.load(getClass().getResource("/fxml/Dashboard.fxml"));
-        contentPane.getChildren().setAll(dashboard);  // Replace the content with the dashboard view
+        contentPane.getChildren().setAll(dashboard); 
     }
 
     @FXML

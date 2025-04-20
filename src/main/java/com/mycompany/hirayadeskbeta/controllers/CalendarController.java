@@ -37,7 +37,7 @@ public class CalendarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         calendarSource = new CalendarSource("My Calendars");
         calendar = new Calendar("Reservations");
         calendar.setStyle(Calendar.Style.STYLE2);
@@ -47,6 +47,12 @@ public class CalendarController implements Initializable {
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(java.time.LocalTime.now());
         
+        try {
+            loadReservations();
+        } catch (SQLException ex) {
+            Logger.getLogger(CalendarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         refreshCalendar.setOnAction(event -> {
             try {
                 loadReservations();
