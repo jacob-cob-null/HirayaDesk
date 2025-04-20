@@ -6,7 +6,9 @@ package com.mycompany.hirayadeskbeta.controllers;
 
 import database.ReservationDBcontroller;
 import static database.ReservationDBcontroller.rawReservationData;
+import static database.ReservationDBcontroller.updateStatus;
 import database.VillaDBcontroller;
+import static database.VillaDBcontroller.updateVillaStatus;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTableView;
@@ -123,6 +125,7 @@ public class ReservationController implements Initializable {
         setupTable();
         try {
             ReservationDBcontroller.mapReservation();
+            updateStatus();
             refreshTable();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -312,17 +315,38 @@ public class ReservationController implements Initializable {
         newDelete.setOnAction(event -> {
             Integer selectedID = (Integer) reservationCombo.getValue();
             if (selectedID == null) {
-                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Villa selected for deletion.");
+                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Reservation selected for deletion.");
                 return;
             }
+
             try {
+                // Find the reservation by ID
+                Reservation reservationToDelete = null;
+                for (Reservation reservation : ReservationDBcontroller.rawReservationData) {
+                    if (reservation.getReservationID() == selectedID) {
+                        reservationToDelete = reservation;
+                        break;
+                    }
+                }
+
+                if (reservationToDelete == null) {
+                    Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "Reservation with ID {0} not found.", selectedID);
+                    return;
+                }
+
+                // Delete the reservation
                 ReservationDBcontroller.deleteReservation(selectedID);
+
+                // Update the villa status (assuming the villaID is from the reservation object)
+                updateVillaStatus(reservationToDelete.getVillaID(), 1);  // Set status back to available (1)
+
+                // Hide the overlay and refresh the UI components
                 deleteOverlay.setVisible(false);
-                loadReservationIDsToComboBox(reservationCombo);
-                reservationCombo.getSelectionModel().clearSelection();
-                refreshTable();
+                loadReservationIDsToComboBox(reservationCombo);  // Refresh combo box
+                reservationCombo.getSelectionModel().clearSelection();  // Clear selection
+                refreshTable();  // Refresh the reservation table
             } catch (SQLException ex) {
-                Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, "Error while deleting reservation with ID: " + selectedID, ex);
             }
         });
     }

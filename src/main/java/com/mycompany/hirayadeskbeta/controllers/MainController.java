@@ -4,6 +4,7 @@
  */
 package com.mycompany.hirayadeskbeta.controllers;
 
+import static database.ReservationDBcontroller.updateStatus;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -32,7 +33,8 @@ public class MainController implements Initializable {
     @FXML
     public void showDashboard() throws Exception {
         AnchorPane dashboard = FXMLLoader.load(getClass().getResource("/fxml/Dashboard.fxml"));
-        contentPane.getChildren().setAll(dashboard); 
+        contentPane.getChildren().setAll(dashboard);
+
     }
 
     @FXML
@@ -48,6 +50,7 @@ public class MainController implements Initializable {
 
         AnchorPane calendar = FXMLLoader.load(getClass().getResource("/fxml/Reservation.fxml"));
         contentPane.getChildren().setAll(calendar);
+        updateStatus();
     }
 
     @FXML
@@ -55,6 +58,7 @@ public class MainController implements Initializable {
 
         AnchorPane calendar = FXMLLoader.load(getClass().getResource("/fxml/Villa.fxml"));
         contentPane.getChildren().setAll(calendar);
+        updateStatus();
     }
 
     @FXML

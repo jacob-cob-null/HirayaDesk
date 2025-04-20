@@ -5,6 +5,7 @@
 package database;
 
 import static database.VillaDBcontroller.rawVillaData;
+import static database.VillaDBcontroller.updateVillaStatus;
 import database.objects.Reservation;
 import database.objects.Villa;
 import java.sql.Connection;
@@ -69,8 +70,11 @@ public class ReservationDBcontroller {
     }
 
     //Check status
-    public static void updateStatus() {
+    public static void updateStatus() throws SQLException {
         for (Reservation res : rawReservationData) {
+            if (res.getStatus() == "complete") {
+                updateVillaStatus(res.getVillaID(), 0);
+            }
             res.setStatus(addStatus(res.getEndDate()));
         }
     }
@@ -194,5 +198,4 @@ public class ReservationDBcontroller {
         }
         return reservationIDs;
     }
-
 }
