@@ -196,6 +196,7 @@ public class ReservationController implements Initializable {
         });
 
         newCreate.setOnAction(event -> {
+            refreshTable();
             String name = nameInput.getText();
             String contact = contactInput.getText();
 
@@ -236,7 +237,11 @@ public class ReservationController implements Initializable {
             contactInput.clear();
             durationInput.clear();
             dateInput.clear();
-            refreshTable();
+            try {
+                ReservationDBcontroller.mapReservation();
+            } catch (SQLException ex) {
+                Logger.getLogger(ReservationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         //UPDATE
