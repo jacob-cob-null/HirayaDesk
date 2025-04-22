@@ -23,19 +23,110 @@
             </Text>
          </children>
       </StackPane>
+      <StackPane prefHeight="1079.0" prefWidth="1684.0" />
       <VBox alignment="CENTER" layoutX="10.0" layoutY="126.0" prefHeight="864.0" prefWidth="1521.0" spacing="20.0">
          <children>
-            <HBox prefHeight="439.0" prefWidth="1593.0" spacing="20.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="439.0" prefWidth="1593.0" spacing="20.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="764.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="764.0" />
+                  <StackPane alignment="CENTER_LEFT" prefHeight="417.0" prefWidth="1555.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3dd37b" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="951.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ongoing Reservations" StackPane.alignment="TOP_CENTER">
+                           <font>
+                              <Font name="Calibri Bold" size="40.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="260.0" top="30.0" />
+                           </StackPane.margin>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Villa" StackPane.alignment="TOP_LEFT">
+                           <font>
+                              <Font name="Calibri Bold" size="40.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="30.0" top="30.0" />
+                           </StackPane.margin>
+                        </Text>
+                        <Text fx:id="availableTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABLE">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="30.0" />
+                           </StackPane.margin>
+                        </Text>
+                        <Text fx:id="ongoingTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ONGOING" StackPane.alignment="CENTER">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="400.0" />
+                           </StackPane.margin>
+                        </Text>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
             <HBox prefHeight="439.0" prefWidth="1483.0" spacing="20.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#033642" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </Rectangle>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Reservations" StackPane.alignment="TOP_LEFT">
+                           <StackPane.margin>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="reservationTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="RESERVATION">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3c6e71" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Villa" StackPane.alignment="TOP_LEFT">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                           </StackPane.margin>
+                        </Text>
+                        <Text fx:id="villaTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="VILLA">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7b32b" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Revenue" StackPane.alignment="TOP_LEFT">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                           </StackPane.margin>
+                        </Text>
+                        <Text fx:id="revenueTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="REVENUE">
+                           <font>
+                              <Font name="Calibri Bold" size="52.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
          </children>

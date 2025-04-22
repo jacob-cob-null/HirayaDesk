@@ -6,21 +6,35 @@ package com.mycompany.hirayadeskbeta.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.text.Text;
 
-/**
- * FXML Controller class
- *
- * @author Jacob
- */
 public class DashboardController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private PieChart chart;
+
+    @FXML
+    private Text reservationTotal;
+
+    @FXML
+    private Text villaTotal;
+
+    @FXML
+    private Text revenueTotal;
+
+    @FXML
+    private Text availableTotal;
+
+    @FXML
+    private Text ongoingTotal;
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
