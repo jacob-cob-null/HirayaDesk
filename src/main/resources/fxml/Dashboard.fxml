@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.hirayadeskbeta.controllers.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.DashboardController">
    <children>
-      <Text layoutX="24.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
+      <StackPane alignment="CENTER_LEFT" layoutX="-29.0" layoutY="-1.0" prefHeight="96.0" prefWidth="1712.0" style="-fx-background-color: #b8dbc4;">
+         <children>
+            <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+               <font>
+                  <Font name="Arial Bold" size="50.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="20.0" left="50.0" top="20.0" />
+               </StackPane.margin>
+            </Text>
+         </children>
+      </StackPane>
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="126.0" prefHeight="864.0" prefWidth="1521.0" spacing="20.0">
+         <children>
+            <HBox prefHeight="439.0" prefWidth="1593.0" spacing="20.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="764.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="764.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="439.0" prefWidth="1483.0" spacing="20.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>
