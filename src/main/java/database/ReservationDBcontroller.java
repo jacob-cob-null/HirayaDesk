@@ -198,4 +198,70 @@ public class ReservationDBcontroller {
         }
         return reservationIDs;
     }
+
+    //get reservation count
+    public static int getReservationCount() throws SQLException {
+        Connection conn = MainDB.connect();
+        String query = "SELECT COUNT(reservationID) AS Count FROM Reservation";
+        int count = 0;
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    //get total revenue
+    public static int getTotalRevenue() throws SQLException {
+        Connection conn = MainDB.connect();
+        String query = "SELECT SUM(price) AS TotalRevenue FROM Reservation";
+        int sum = 0;
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                sum = rs.getInt("TotalRevenue");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sum;
+    }
+
+    //get ongoing reservation
+    public static int getOngoingReservation() {
+        int count = 0;
+        for (Reservation res : rawReservationData) {
+            if ("ongoing".equals(res.getStatus())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //get room tier distribution, join reservation and villa tables
+    public static int[] getTierDistribution() throws SQLException {
+        Connection conn = MainDB.connect();
+        String query = "SELECT \n"
+                + "    v.tierID,\n"
+                + "    COUNT(r.villaID) AS tierCount\n"
+                + "FROM Villa v \n"
+                + "JOIN Reservation r ON v.villaID = r.villaID\n"
+                + "GROUP BY v.tierID;";
+        int[] tierDist = new int[3];
+        int index = 0;
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tierDist[index] = rs.getInt("tierCount");
+                index++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tierDist;
+    }
 }

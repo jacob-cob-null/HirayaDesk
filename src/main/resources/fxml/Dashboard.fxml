@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -24,19 +28,35 @@
          </children>
       </StackPane>
       <StackPane prefHeight="1079.0" prefWidth="1684.0" />
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="126.0" prefHeight="864.0" prefWidth="1521.0" spacing="20.0">
+      <VBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="126.0" prefHeight="864.0" prefWidth="1521.0" spacing="20.0">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="439.0" prefWidth="1593.0" spacing="20.0">
                <children>
-                  <StackPane alignment="CENTER_LEFT" prefHeight="417.0" prefWidth="1555.0">
+                  <StackPane alignment="CENTER_LEFT" prefHeight="439.0" prefWidth="814.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3dd37b" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="951.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ongoing Reservations" StackPane.alignment="TOP_CENTER">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="838.0">
+                           <fill>
+                              <LinearGradient endX="1.0" endY="0.09478672985781988" startY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.1289595514535904" green="0.3815789520740509" blue="0.28474152088165283" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.21960784494876862" green="0.6823529601097107" blue="0.30980393290519714" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill></Rectangle>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ongoing Reservations" StackPane.alignment="TOP_RIGHT">
                            <font>
                               <Font name="Calibri Bold" size="40.0" />
                            </font>
                            <StackPane.margin>
-                              <Insets right="260.0" top="30.0" />
+                              <Insets right="40.0" top="30.0" />
                            </StackPane.margin>
                         </Text>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Villa" StackPane.alignment="TOP_LEFT">
@@ -47,38 +67,59 @@
                               <Insets left="30.0" top="30.0" />
                            </StackPane.margin>
                         </Text>
-                        <Text fx:id="availableTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABLE">
+                        <Text fx:id="availableTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                            <font>
-                              <Font name="Calibri Bold" size="52.0" />
+                              <Font name="Calibri Bold" size="87.0" />
                            </font>
                            <StackPane.margin>
                               <Insets left="30.0" />
                            </StackPane.margin>
                         </Text>
-                        <Text fx:id="ongoingTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ONGOING" StackPane.alignment="CENTER">
+                        <Text fx:id="ongoingTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" StackPane.alignment="CENTER">
                            <font>
-                              <Font name="Calibri Bold" size="52.0" />
+                              <Font name="Calibri Bold" size="87.0" />
                            </font>
                            <StackPane.margin>
-                              <Insets right="400.0" />
+                              <Insets left="80.0" />
                            </StackPane.margin>
                         </Text>
                      </children>
                   </StackPane>
+                  <StackPane prefHeight="439.0" prefWidth="1339.0">
+                     <children>
+                        <PieChart fx:id="tierChart" prefHeight="439.0" prefWidth="733.0" />
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
-            <HBox prefHeight="439.0" prefWidth="1483.0" spacing="20.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="312.0" prefWidth="1546.0" spacing="20.0">
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#033642" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="300.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0">
                            <StackPane.margin>
                               <Insets />
                            </StackPane.margin>
+                           <fill>
+                              <LinearGradient endX="1.0" endY="1.0" startX="0.2274881516587678" startY="0.6208530805687204">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color green="0.23947368562221527" blue="0.2763157784938812" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.015594542026519775" green="0.42105263471603394" blue="0.40077972412109375" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
                         </Rectangle>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Reservations" StackPane.alignment="TOP_LEFT">
                            <StackPane.margin>
-                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                              <Insets bottom="50.0" left="30.0" right="50.0" top="30.0" />
                            </StackPane.margin>
                            <font>
                               <Font name="Calibri Bold" size="52.0" />
@@ -86,44 +127,85 @@
                         </Text>
                         <Text fx:id="reservationTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="RESERVATION">
                            <font>
-                              <Font name="Calibri Bold" size="52.0" />
+                              <Font name="Calibri Bold" size="76.0" />
                            </font>
+                           <StackPane.margin>
+                              <Insets top="40.0" />
+                           </StackPane.margin>
                         </Text>
                      </children>
                   </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <StackPane prefHeight="430.0" prefWidth="502.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3c6e71" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="300.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0">
+                           <fill>
+                              <LinearGradient endX="1.0" startX="0.16113744075829384" startY="0.2938388625592417">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.1419956088066101" green="0.2763157784938812" blue="0.23825840651988983" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.239215686917305" green="0.43921568989753723" blue="0.3843137323856354" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill></Rectangle>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Villa" StackPane.alignment="TOP_LEFT">
                            <font>
                               <Font name="Calibri Bold" size="52.0" />
                            </font>
                            <StackPane.margin>
-                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                              <Insets bottom="50.0" left="30.0" right="50.0" top="30.0" />
                            </StackPane.margin>
                         </Text>
                         <Text fx:id="villaTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="VILLA">
                            <font>
-                              <Font name="Calibri Bold" size="52.0" />
+                              <Font name="Calibri Bold" size="76.0" />
                            </font>
+                           <StackPane.margin>
+                              <Insets top="40.0" />
+                           </StackPane.margin>
                         </Text>
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7b32b" height="395.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="300.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="502.0">
+                           <fill>
+                              <LinearGradient endX="1.0" endY="0.09478672985781988" startY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.7368420958518982" green="0.34385964274406433" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" green="0.6826666593551636" blue="0.3199999928474426" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill></Rectangle>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Revenue" StackPane.alignment="TOP_LEFT">
                            <font>
                               <Font name="Calibri Bold" size="52.0" />
                            </font>
                            <StackPane.margin>
-                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                              <Insets bottom="50.0" left="30.0" right="50.0" top="30.0" />
                            </StackPane.margin>
                         </Text>
                         <Text fx:id="revenueTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="REVENUE">
                            <font>
-                              <Font name="Calibri Bold" size="52.0" />
+                              <Font name="Calibri Bold" size="58.0" />
                            </font>
+                           <StackPane.margin>
+                              <Insets top="40.0" />
+                           </StackPane.margin>
                         </Text>
                      </children>
                   </StackPane>

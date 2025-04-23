@@ -233,6 +233,7 @@ public class ReservationController implements Initializable {
             createOverlay.setVisible(false);
             VillaController.loadVillaIDsToComboBox(villaCombo);
             villaCombo.getSelectionModel().clearSelection();
+            refreshTable();
             nameInput.clear();
             contactInput.clear();
             durationInput.clear();

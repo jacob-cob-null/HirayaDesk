@@ -137,4 +137,37 @@ public class VillaDBcontroller {
             MainDB.closeConnection(conn);
         }
     }
+
+    //get villa count
+    public static int getVillaCount() throws SQLException {
+        Connection conn = MainDB.connect();
+        String query = "SELECT COUNT(villaID) as Count FROM Villa";
+        int count = 0;
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // get all available villa
+    public static int getAvailableVillaCount() throws SQLException {
+        Connection conn = MainDB.connect();
+        String query = "SELECT COUNT(villaID) as Count FROM Villa WHERE availability = 1";
+        int count = 0;
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
 }

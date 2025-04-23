@@ -7,9 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import database.MainDB;
 import database.AdminDBcontroller;
+import static database.ReservationDBcontroller.mapReservation;
+import static database.VillaDBcontroller.mapVilla;
 import java.util.Scanner;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * JavaFX App
@@ -33,7 +36,9 @@ public class App extends Application {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        mapReservation();
+        mapVilla();
         launch();
     }
 
