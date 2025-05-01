@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 
 public class VillaController implements Initializable {
 
@@ -195,4 +196,12 @@ public class VillaController implements Initializable {
         villaData.addAll(VillaDBcontroller.rawVillaData);
         villaTable.setItems(villaData);
     }
+    
+        private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
 }

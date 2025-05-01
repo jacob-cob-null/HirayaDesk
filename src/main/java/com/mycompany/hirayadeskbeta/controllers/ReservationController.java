@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -214,7 +215,7 @@ public class ReservationController implements Initializable {
 
             // Get the villa ID from the VillaComboItem
             Integer villa = selectedVilla.getVillaID();
-            
+
             // Convert duration and startDateStr to their respective types
             int duration = Integer.parseInt(durationStr);
 
@@ -273,10 +274,10 @@ public class ReservationController implements Initializable {
                 Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "Missing Fields");
                 return;
             }
-            
+
             // Get the villa ID from the VillaComboItem
             Integer villa = selectedVilla.getVillaID();
-            
+
             Integer oldVilla = null;
             for (Reservation res : rawReservationData) {
                 if (res.getReservationID() == id) {
@@ -381,4 +382,13 @@ public class ReservationController implements Initializable {
         reservationData.addAll(ReservationDBcontroller.rawReservationData);
         reservationTable.setItems(reservationData);
     }
+
+    //custom alert
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
 }

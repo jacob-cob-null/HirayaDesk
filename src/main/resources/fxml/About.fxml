@@ -1,16 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.hirayadeskbeta.controllers.AboutController">
+<AnchorPane id="AnchorPane" prefHeight="1082.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hirayadeskbeta.controllers.AboutController">
    <children>
-      <Text layoutX="44.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About">
+      <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Developers:">
          <font>
-            <Font size="22.0" />
+            <Font name="Arial Bold" size="50.0" />
          </font>
       </Text>
+      <StackPane alignment="CENTER_LEFT" layoutX="-29.0" layoutY="-2.0" prefHeight="96.0" prefWidth="1712.0" style="-fx-background-color: #b8dbc4;">
+         <children>
+            <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="ABOUT">
+               <font>
+                  <Font name="Arial Bold" size="50.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="20.0" left="50.0" top="20.0" />
+               </StackPane.margin>
+            </Text>
+         </children>
+      </StackPane>
+      <HBox alignment="CENTER" layoutX="-10.0" layoutY="89.0" prefHeight="718.0" prefWidth="1696.0" spacing="200.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HIRAYA ABODE offers nature-themed villas in Regular, Premium, and Luxury tiers, providing a serene escape for every type of traveler. Each villa blends modern comfort with natural beauty for an unforgettable experience. Powered by HIRAYA DESK, our efficient reservation management system ensures seamless bookings and exceptional service, enhancing convenience for both guests and staff." textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Text>
+            <VBox alignment="CENTER" prefHeight="718.0" prefWidth="427.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tech Stack used:" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JAVA " textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JAVAFX" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JDBC " textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SQLITE" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MAVEN" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GIT" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JAVAFX DEPENDENCIES:" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CALENDARFX" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="140.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MATERIALFX" textAlignment="JUSTIFY" wrappingWidth="559.6001434326172">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="140.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <StackPane alignment="TOP_LEFT" layoutX="-29.0" layoutY="805.0" prefHeight="281.0" prefWidth="1712.0" style="-fx-background-color: #b8dbc4;">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+               <StackPane.margin>
+                  <Insets left="380.0" />
+               </StackPane.margin>
+               <children>
+                  <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Lance Jacob Silverio">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Trizy Gabriel Nicdao">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Laurenze Punla">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="60.0" left="10.0" right="60.0" top="30.0" />
+               </padding>
+            </VBox>
+            <Text fill="#1b4137" strokeType="OUTSIDE" strokeWidth="0.0" text="Developers:">
+               <font>
+                  <Font name="Arial Bold" size="50.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="20.0" left="50.0" top="20.0" />
+               </StackPane.margin>
+            </Text>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
