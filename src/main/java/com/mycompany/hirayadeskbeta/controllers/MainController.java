@@ -11,6 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
 
 /**
  * FXML Controller class
@@ -19,12 +23,23 @@ import javafx.scene.layout.AnchorPane;
  */
 public class MainController implements Initializable {
 
+    @FXML
+    private VBox mainVbox;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            Image logoImage = new Image(getClass().getResourceAsStream("/image/LOGO.png"));
+            ImageView logoView = new ImageView(logoImage);
+            logoView.setFitHeight(93);
+            logoView.setFitWidth(101);
+            logoView.setPreserveRatio(true);
+            VBox.setMargin(logoView, new Insets(0, 0, 150, 0));
+            mainVbox.getChildren().add(0, logoView);
+
             showDashboard();
         } catch (Exception e) {
-            e.printStackTrace(); // Helps catch any load issues
+            e.printStackTrace();
         }
     }
     @FXML
