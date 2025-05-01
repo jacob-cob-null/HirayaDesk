@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import database.objects.Villa;
+import database.objects.VillaComboItem;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,27 @@ import java.util.List;
 public class VillaDBcontroller {
 
     public static List<Villa> rawVillaData = new ArrayList<>();
+
+    // Add this new method to get villa IDs with their tier information
+    public static List<VillaComboItem> getAvailableVillasWithTier() throws SQLException {
+        List<VillaComboItem> villaItems = new ArrayList<>();
+        Connection conn = MainDB.connect();
+        String query = "SELECT v.villaID, v.tierID FROM Villa v WHERE v.availability = 1";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Integer villaID = rs.getInt("villaID");
+                String tierID = rs.getString("tierID");
+                villaItems.add(new VillaComboItem(villaID, tierID));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MainDB.closeConnection(conn);
+        }
+        return villaItems;
+    }
 
     //Mapping Villa table to tableView
     public static void mapVilla() throws SQLException {
@@ -54,25 +76,6 @@ public class VillaDBcontroller {
         } finally {
             MainDB.closeConnection(conn);
         }
-    }
-
-    //get villaID
-    public static List<Integer> getAllVillaIDs() throws SQLException {
-        List<Integer> villaIDs = new ArrayList<>();
-        Connection conn = MainDB.connect();
-        String query = "SELECT villaID FROM Villa WHERE availability = 1";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                villaIDs.add(rs.getInt("villaID"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            MainDB.closeConnection(conn);
-        }
-        return villaIDs;
     }
 
     public static List<String> getAllTierIDs() throws SQLException {

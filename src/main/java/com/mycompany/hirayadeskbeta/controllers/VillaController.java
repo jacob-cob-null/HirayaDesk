@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 import database.VillaDBcontroller;  // Import VillaDBcontroller
 import database.objects.Villa;    // Import Villa class
+import database.objects.VillaComboItem;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import java.net.URL;
@@ -50,7 +51,7 @@ public class VillaController implements Initializable {
     private MFXComboBox<String> tierCombo;
 
     @FXML
-    private MFXFilterComboBox<Integer> villaCombo;
+    private MFXFilterComboBox<VillaComboItem> villaCombo;  // Changed from Integer to VillaComboItem
 
     @FXML
     private MFXButton newRecord;
@@ -118,7 +119,7 @@ public class VillaController implements Initializable {
         newRecord.setOnAction(event -> {
             String selectedID = tierCombo.getValue();
             if (selectedID == null) {
-                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Villa selected for deletion.");
+                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Tier selected for villa creation.");
                 return;
             }
             try {
@@ -138,22 +139,24 @@ public class VillaController implements Initializable {
             loadVillaIDsToComboBox(villaCombo);
             deleteOverlay.setVisible(true);
         });
+        
         cancel1.setOnAction(event -> {
             createOverlay.setVisible(false);
         });
+        
         cancel2.setOnAction(event -> {
             deleteOverlay.setVisible(false);
         });
 
         //DELETING
         newDelete.setOnAction(event -> {
-            Integer selectedID = villaCombo.getValue();
-            if (selectedID == null) {
+            VillaComboItem selectedItem = villaCombo.getValue();  // Changed to use VillaComboItem
+            if (selectedItem == null) {
                 Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "No Villa selected for deletion.");
                 return;
             }
             try {
-                VillaDBcontroller.deleteVilla(selectedID);
+                VillaDBcontroller.deleteVilla(selectedItem.getVillaID());  // Get villaID from the VillaComboItem
                 deleteOverlay.setVisible(false);
                 loadVillaIDsToComboBox(villaCombo);
                 villaCombo.getSelectionModel().clearSelection();
@@ -164,15 +167,15 @@ public class VillaController implements Initializable {
         });
     }
 
-    public static void loadVillaIDsToComboBox(MFXFilterComboBox<Integer> combo) {
+    public static void loadVillaIDsToComboBox(MFXFilterComboBox<VillaComboItem> combo) {
         if (combo == null) {
             Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "ComboBox is null in loadVillaIDsToComboBox");
             return;
         }
 
         try {
-            List<Integer> villaIDs = VillaDBcontroller.getAllVillaIDs();
-            combo.setItems(FXCollections.observableArrayList(villaIDs));
+            List<VillaComboItem> villaItems = VillaDBcontroller.getAvailableVillasWithTier();
+            combo.setItems(FXCollections.observableArrayList(villaItems));
         } catch (SQLException e) {
             e.printStackTrace();
         }

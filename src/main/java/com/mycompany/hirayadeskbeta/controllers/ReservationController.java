@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.hirayadeskbeta.controllers;
 
 import database.ReservationDBcontroller;
@@ -18,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import database.objects.Reservation;
+import database.objects.VillaComboItem;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
@@ -90,7 +87,7 @@ public class ReservationController implements Initializable {
     private MFXTextField contactInput;
 
     @FXML
-    private MFXFilterComboBox<Integer> villaCombo;
+    private MFXFilterComboBox<VillaComboItem> villaCombo;
 
     @FXML
     private MFXTextField durationInput;
@@ -108,7 +105,7 @@ public class ReservationController implements Initializable {
     private MFXTextField updateContact;
 
     @FXML
-    private MFXFilterComboBox<Integer> updateVilla;
+    private MFXFilterComboBox<VillaComboItem> updateVilla;
 
     @FXML
     private MFXTextField updateDuration;
@@ -188,7 +185,7 @@ public class ReservationController implements Initializable {
     private void setupListeners() {
         // CREATE 
         createBtn.setOnAction(event -> {
-            VillaController.loadVillaIDsToComboBox(villaCombo);  // Ensure that the combo box is populated
+            VillaController.loadVillaIDsToComboBox(villaCombo);  // Now compatible with VillaComboItem
             createOverlay.setVisible(true);
         });
         cancel1.setOnAction(event -> {
@@ -200,14 +197,14 @@ public class ReservationController implements Initializable {
             String name = nameInput.getText();
             String contact = contactInput.getText();
 
-            Integer villa = (Integer) villaCombo.getValue();
+            VillaComboItem selectedVilla = villaCombo.getValue();
             String durationStr = durationInput.getText();
             String startDateStr = dateInput.getText();
 
             // Validate inputs
             if (name == null || name.isEmpty()
                     || contact == null || contact.isEmpty()
-                    || villa == null
+                    || selectedVilla == null
                     || durationStr == null || durationStr.isEmpty()
                     || startDateStr == null || startDateStr.isEmpty()) {
 
@@ -215,6 +212,9 @@ public class ReservationController implements Initializable {
                 return;
             }
 
+            // Get the villa ID from the VillaComboItem
+            Integer villa = selectedVilla.getVillaID();
+            
             // Convert duration and startDateStr to their respective types
             int duration = Integer.parseInt(durationStr);
 
@@ -240,6 +240,7 @@ public class ReservationController implements Initializable {
             dateInput.clear();
             try {
                 ReservationDBcontroller.mapReservation();
+                refreshTable();
             } catch (SQLException ex) {
                 Logger.getLogger(ReservationController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -258,20 +259,24 @@ public class ReservationController implements Initializable {
             Integer id = (Integer) reservationCombo2.getValue();
             String name = updateName.getText();
             String contact = updateContact.getText();
-            Integer villa = (Integer) updateVilla.getValue();
+            VillaComboItem selectedVilla = updateVilla.getValue();
             String durationStr = updateDuration.getText();
             String startDateStr = updateDate.getText();
 
             // Validate inputs
             if (id == null || name == null || name.isEmpty()
                     || contact == null || contact.isEmpty()
-                    || villa == null
+                    || selectedVilla == null
                     || durationStr == null || durationStr.isEmpty()
                     || startDateStr == null || startDateStr.isEmpty()) {
 
                 Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "Missing Fields");
                 return;
             }
+            
+            // Get the villa ID from the VillaComboItem
+            Integer villa = selectedVilla.getVillaID();
+            
             Integer oldVilla = null;
             for (Reservation res : rawReservationData) {
                 if (res.getReservationID() == id) {
@@ -376,5 +381,4 @@ public class ReservationController implements Initializable {
         reservationData.addAll(ReservationDBcontroller.rawReservationData);
         reservationTable.setItems(reservationData);
     }
-
 }
