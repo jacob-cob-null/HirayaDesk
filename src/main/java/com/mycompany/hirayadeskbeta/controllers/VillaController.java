@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 public class VillaController implements Initializable {
 
@@ -129,6 +130,7 @@ public class VillaController implements Initializable {
                 loadTierIDsToComboBox();
                 tierCombo.getSelectionModel().clearSelection();
                 refreshTable();
+                showAlert(Alert.AlertType.CONFIRMATION, "Reservation Created", (Stage) newDelete.getScene().getWindow());
 
             } catch (SQLException ex) {
                 Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -140,11 +142,11 @@ public class VillaController implements Initializable {
             loadVillaIDsToComboBox(villaCombo);
             deleteOverlay.setVisible(true);
         });
-        
+
         cancel1.setOnAction(event -> {
             createOverlay.setVisible(false);
         });
-        
+
         cancel2.setOnAction(event -> {
             deleteOverlay.setVisible(false);
         });
@@ -162,6 +164,7 @@ public class VillaController implements Initializable {
                 loadVillaIDsToComboBox(villaCombo);
                 villaCombo.getSelectionModel().clearSelection();
                 refreshTable();
+                showAlert(Alert.AlertType.CONFIRMATION, "Villa " + selectedItem + " has been deleted", (Stage) newDelete.getScene().getWindow());
             } catch (SQLException ex) {
                 Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -196,11 +199,13 @@ public class VillaController implements Initializable {
         villaData.addAll(VillaDBcontroller.rawVillaData);
         villaTable.setItems(villaData);
     }
-    
-        private void showAlert(Alert.AlertType type, String message) {
+
+    //custom alert
+    private void showAlert(Alert.AlertType type, String message, Stage ownerStage) {
         Alert alert = new Alert(type);
         alert.setContentText(message);
         alert.setHeaderText(null);
+        alert.initOwner(ownerStage); // Pass the owner stage
         alert.showAndWait();
     }
 

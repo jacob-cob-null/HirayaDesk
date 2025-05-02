@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.hirayadeskbeta.controllers;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -25,11 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Jacob
- */
 public class LoginController implements Initializable {
 
     @FXML
@@ -55,27 +46,30 @@ public class LoginController implements Initializable {
             int username = Integer.parseInt(usernameField.getText());
             String password = passwordField.getText();
             boolean authStatus = AdminDBcontroller.authenticate(username, password);
+            
+            Stage stage = (Stage) loginBtn.getScene().getWindow(); // Get the stage here
+            
             if (authStatus) {
-                //successful login
+                // Successful login
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
                 Parent dashboardRoot = loader.load();
-                Stage stage = (Stage) loginBtn.getScene().getWindow();
                 Scene dashboardScene = new Scene(dashboardRoot);
                 stage.setScene(dashboardScene);
                 stage.show();
             } else {
-                //unsuccessful login
-                showAlert(Alert.AlertType.ERROR, "Invalid ID or password.");
+                // Unsuccessful login
+                showAlert(Alert.AlertType.ERROR, "Invalid ID or password.", stage);
             }
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "User ID must be a number.");
+            showAlert(Alert.AlertType.ERROR, "User ID must be a number.", (Stage) loginBtn.getScene().getWindow());
         }
     }
 
-    private void showAlert(Alert.AlertType type, String message) {
+    private void showAlert(Alert.AlertType type, String message, Stage ownerStage) {
         Alert alert = new Alert(type);
         alert.setContentText(message);
         alert.setHeaderText(null);
+        alert.initOwner(ownerStage); // Pass the owner stage
         alert.showAndWait();
     }
 

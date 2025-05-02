@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -197,10 +198,21 @@ public class ReservationController implements Initializable {
             refreshTable();
             String name = nameInput.getText();
             String contact = contactInput.getText();
-
             VillaComboItem selectedVilla = villaCombo.getValue();
             String durationStr = durationInput.getText();
             String startDateStr = dateInput.getText();
+
+            int duration;
+            try {
+                duration = Integer.parseInt(durationStr);
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Invalid duration input.", (Stage) newCreate.getScene().getWindow());
+                return;
+            }
+            if (contact.length() > 11) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Contact Number Length", (Stage) newCreate.getScene().getWindow());
+                return;
+            }
 
             // Validate inputs
             if (name == null || name.isEmpty()
@@ -209,15 +221,12 @@ public class ReservationController implements Initializable {
                     || durationStr == null || durationStr.isEmpty()
                     || startDateStr == null || startDateStr.isEmpty()) {
 
-                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "Missing Fields");
+                showAlert(Alert.AlertType.WARNING, "Missing Fields", (Stage) newCreate.getScene().getWindow());
                 return;
             }
 
             // Get the villa ID from the VillaComboItem
             Integer villa = selectedVilla.getVillaID();
-
-            // Convert duration and startDateStr to their respective types
-            int duration = Integer.parseInt(durationStr);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
 
@@ -239,6 +248,7 @@ public class ReservationController implements Initializable {
             contactInput.clear();
             durationInput.clear();
             dateInput.clear();
+            showAlert(Alert.AlertType.CONFIRMATION, "Reservation Created", (Stage) newDelete.getScene().getWindow());
             try {
                 ReservationDBcontroller.mapReservation();
                 refreshTable();
@@ -257,12 +267,25 @@ public class ReservationController implements Initializable {
             updateOverlay.setVisible(false);
         });
         newUpdate.setOnAction(event -> {
+
             Integer id = (Integer) reservationCombo2.getValue();
             String name = updateName.getText();
             String contact = updateContact.getText();
             VillaComboItem selectedVilla = updateVilla.getValue();
             String durationStr = updateDuration.getText();
             String startDateStr = updateDate.getText();
+
+            int duration;
+            try {
+                duration = Integer.parseInt(durationStr);
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Invalid duration input.", (Stage) newUpdate.getScene().getWindow());
+                return;
+            }
+            if (contact.length() > 11) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Contact Number Length", (Stage) newUpdate.getScene().getWindow());
+                return;
+            }
 
             // Validate inputs
             if (id == null || name == null || name.isEmpty()
@@ -271,7 +294,7 @@ public class ReservationController implements Initializable {
                     || durationStr == null || durationStr.isEmpty()
                     || startDateStr == null || startDateStr.isEmpty()) {
 
-                Logger.getLogger(VillaController.class.getName()).log(Level.WARNING, "Missing Fields");
+                showAlert(Alert.AlertType.ERROR, "Missing Fields", (Stage) newUpdate.getScene().getWindow());
                 return;
             }
 
@@ -285,7 +308,6 @@ public class ReservationController implements Initializable {
                 }
             }
 
-            int duration = Integer.parseInt(durationStr);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
 
             LocalDate startDate = LocalDate.parse(startDateStr, formatter);
@@ -313,6 +335,7 @@ public class ReservationController implements Initializable {
             updateContact.clear();
             updateDuration.clear();
             updateDate.clear();
+            showAlert(Alert.AlertType.CONFIRMATION, "Reservation " + id + " has been updated", (Stage) newUpdate.getScene().getWindow());
         });
 
         //DELETE
@@ -354,9 +377,10 @@ public class ReservationController implements Initializable {
 
                 // Hide the overlay and refresh the UI components
                 deleteOverlay.setVisible(false);
-                loadReservationIDsToComboBox(reservationCombo);  // Refresh combo box
-                reservationCombo.getSelectionModel().clearSelection();  // Clear selection
-                refreshTable();  // Refresh the reservation table
+                loadReservationIDsToComboBox(reservationCombo);
+                reservationCombo.getSelectionModel().clearSelection();
+                refreshTable();
+                showAlert(Alert.AlertType.CONFIRMATION, "Reservation " + selectedID + " has been deleted", (Stage) newDelete.getScene().getWindow());
             } catch (SQLException ex) {
                 Logger.getLogger(VillaController.class.getName()).log(Level.SEVERE, "Error while deleting reservation with ID: " + selectedID, ex);
             }
@@ -384,11 +408,20 @@ public class ReservationController implements Initializable {
     }
 
     //custom alert
-    private void showAlert(Alert.AlertType type, String message) {
+    private void showAlert(Alert.AlertType type, String message, Stage ownerStage) {
         Alert alert = new Alert(type);
         alert.setContentText(message);
         alert.setHeaderText(null);
+        alert.initOwner(ownerStage); // Pass the owner stage
         alert.showAndWait();
     }
 
+    public static Boolean checkInt(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
