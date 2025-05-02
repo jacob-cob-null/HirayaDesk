@@ -243,11 +243,11 @@ public class ReservationController implements Initializable {
             createOverlay.setVisible(false);
             VillaController.loadVillaIDsToComboBox(villaCombo);
             villaCombo.getSelectionModel().clearSelection();
-            refreshTable();
             nameInput.clear();
             contactInput.clear();
             durationInput.clear();
             dateInput.clear();
+            refreshTable();
             showAlert(Alert.AlertType.CONFIRMATION, "Reservation Created", (Stage) newDelete.getScene().getWindow());
             try {
                 ReservationDBcontroller.mapReservation();
@@ -328,13 +328,13 @@ public class ReservationController implements Initializable {
             updateOverlay.setVisible(false);
             loadReservationIDsToComboBox(reservationCombo2);
             VillaController.loadVillaIDsToComboBox(updateVilla);
-            refreshTable();
             reservationCombo2.getSelectionModel().clearSelection();
             updateVilla.getSelectionModel().clearSelection();
             updateName.clear();
             updateContact.clear();
             updateDuration.clear();
             updateDate.clear();
+            refreshTable();
             showAlert(Alert.AlertType.CONFIRMATION, "Reservation " + id + " has been updated", (Stage) newUpdate.getScene().getWindow());
         });
 
